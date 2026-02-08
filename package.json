@@ -1,0 +1,16 @@
+{
+  "name": "developer-portfolio",
+  "version": "1.0.0",
+  "description": "반응형 개발자 웹 이력서",
+  "main": "index.html",
+  "scripts": {
+    "dev": "tailwindcss -i ./src/input.css -o ./css/style.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./css/style.css --minify"
+  },
+  "keywords": ["portfolio", "resume", "developer", "web"],
+  "author": "김개발",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}

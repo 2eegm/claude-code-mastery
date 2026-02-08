@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(npm install)",
+      "Bash(npm run build:*)"
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "export PATH=\"/c/Users/ty210/bin:$PATH\"; input=$(cat); model=$(echo \"$input\" | jq -r '.model.display_name'); cwd=$(echo \"$input\" | jq -r '.workspace.current_dir'); used=$(echo \"$input\" | jq -r '.context_window.used_percentage // empty'); remaining=$(echo \"$input\" | jq -r '.context_window.remaining_percentage // empty'); total_in=$(echo \"$input\" | jq -r '.context_window.total_input_tokens // empty'); total_out=$(echo \"$input\" | jq -r '.context_window.total_output_tokens // empty'); style=$(echo \"$input\" | jq -r '.output_style.name // empty'); vim_mode=$(echo \"$input\" | jq -r '.vim.mode // empty'); printf '\\033[36mModel:\\033[0m %s' \"$model\"; [ -n \"$vim_mode\" ] && printf ' \\033[90m›\\033[0m \\033[34m[%s]\\033[0m' \"$vim_mode\"; printf ' \\033[90m›\\033[0m \\033[36mDir:\\033[0m %s' \"$cwd\"; git_branch=$(cd \"$cwd\" 2>/dev/null && git -c core.hooksPath=/dev/null rev-parse --abbrev-ref HEAD 2>/dev/null); if [ -n \"$git_branch\" ]; then git_dirty=$(cd \"$cwd\" 2>/dev/null && git -c core.hooksPath=/dev/null status --porcelain 2>/dev/null); if [ -n \"$git_dirty\" ]; then printf ' \\033[90m›\\033[0m \\033[33m⎇ %s *\\033[0m' \"$git_branch\"; else printf ' \\033[90m›\\033[0m \\033[32m⎇ %s\\033[0m' \"$git_branch\"; fi; fi; [ -n \"$style\" ] && printf ' \\033[90m›\\033[0m \\033[36mStyle:\\033[0m %s' \"$style\"; if [ -n \"$used\" ]; then if [ \"$used\" -ge 80 ] 2>/dev/null; then printf ' \\033[90m›\\033[0m \\033[33mContext:\\033[0m \\033[33m%s%% used\\033[0m' \"$used\"; elif [ \"$used\" -ge 60 ] 2>/dev/null; then printf ' \\033[90m›\\033[0m \\033[36mContext:\\033[0m \\033[33m%s%% used\\033[0m' \"$used\"; else printf ' \\033[90m›\\033[0m \\033[36mContext:\\033[0m %s%% used' \"$used\"; fi; fi; if [ -n \"$total_in\" ] && [ -n \"$total_out\" ]; then printf ' \\033[90m›\\033[0m \\033[36mTokens:\\033[0m \\033[90min:%s out:%s\\033[0m' \"$total_in\" \"$total_out\"; fi; printf '\\n'"
+  },
+  "outputStyle": "default"
+}
